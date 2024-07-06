@@ -1,3 +1,5 @@
+import { type MouseEventHandler } from 'react';
+
 import { cva } from 'class-variance-authority';
 
 import { CharacterData } from '@/character/types';
@@ -5,7 +7,6 @@ import { CharacterData } from '@/character/types';
 import Avatar from '@/shared/components/Avatar';
 import FilledHeartIcon from '@/shared/components/FilledHeartIcon';
 import OutlinedHeartIcon from '@/shared/components/OutlinedHeartIcon';
-import { MouseEventHandler } from 'react';
 
 interface CharacterCardProps {
   characterData: CharacterData;
@@ -50,12 +51,12 @@ const CharacterCard = (props: CharacterCardProps) => {
           {isStarred ? (
             <>
               <FilledHeartIcon />
-              <span className="sr-only">Filled Heart Icon</span>
+              <span className="sr-only fixed">Filled Heart Icon</span>
             </>
           ) : (
             <>
               <OutlinedHeartIcon />
-              <span className="sr-only">Outlined Heart Icon</span>
+              <span className="sr-only fixed">Outlined Heart Icon</span>
             </>
           )}
         </button>

@@ -25,7 +25,7 @@ const StarrredCharacterList = (props: ResultCharacterListProps) => {
   const toggleCharacter = useCharacterStore((store) => store.toggleCharacter);
 
   return (
-    <ListContainer>
+    <ListContainer className="shrink-0 max-h-[20rem]">
       <ListLabel>
         {filterNumber > 0 ? (
           <>

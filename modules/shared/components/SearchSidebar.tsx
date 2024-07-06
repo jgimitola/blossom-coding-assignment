@@ -11,6 +11,7 @@ import useCharacterStore from '@/character/zustand/characterStore';
 import Searchbar from './Searchbar';
 
 const containerClasses = cva([
+  'flex',
   'flex-col',
   'h-full',
   'w-[23.4375rem]',
