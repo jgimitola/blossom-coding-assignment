@@ -1,5 +1,7 @@
 import { type MouseEventHandler } from 'react';
 
+import { useRouter } from 'next/router';
+
 import { cva } from 'class-variance-authority';
 
 import { CharacterData } from '@/character/types';
@@ -34,8 +36,14 @@ const buttonClasses = cva([
 const CharacterCard = (props: CharacterCardProps) => {
   const { characterData, isStarred = false, handleToggle } = props;
 
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.replace(`/character/${characterData.id}`);
+  };
+
   return (
-    <li className={containerClasses()}>
+    <li className={containerClasses()} onClick={handleClick}>
       <Avatar
         src={characterData.image}
         alt={`${characterData.name} profile image`}
@@ -50,7 +58,10 @@ const CharacterCard = (props: CharacterCardProps) => {
         <button
           type="button"
           className={buttonClasses()}
-          onClick={handleToggle}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleToggle?.(e);
+          }}
         >
           {isStarred ? (
             <>

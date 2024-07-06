@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query GET_CHARACTERS($page: Int!, $status: String!, $species: String!, $gender: String!) {\n    characters(page: $page, filter: {status: $status, species: $species, gender: $gender}) {\n    info {\n      count\n    }\n    results {\n      id\n      name\n      status\n      species\n      gender\n      image\n    }\n  }\n  }": types.Get_CharactersDocument,
+    "\n  query GET_CHARACTER_BY_ID($id: ID!) {\n    character(id: $id) {\n    id\n    name\n    status\n    species\n    gender\n    image\n  }\n  }": types.Get_Character_By_IdDocument,
 };
 
 /**
@@ -34,6 +35,10 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GET_CHARACTERS($page: Int!, $status: String!, $species: String!, $gender: String!) {\n    characters(page: $page, filter: {status: $status, species: $species, gender: $gender}) {\n    info {\n      count\n    }\n    results {\n      id\n      name\n      status\n      species\n      gender\n      image\n    }\n  }\n  }"): (typeof documents)["\n  query GET_CHARACTERS($page: Int!, $status: String!, $species: String!, $gender: String!) {\n    characters(page: $page, filter: {status: $status, species: $species, gender: $gender}) {\n    info {\n      count\n    }\n    results {\n      id\n      name\n      status\n      species\n      gender\n      image\n    }\n  }\n  }"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GET_CHARACTER_BY_ID($id: ID!) {\n    character(id: $id) {\n    id\n    name\n    status\n    species\n    gender\n    image\n  }\n  }"): (typeof documents)["\n  query GET_CHARACTER_BY_ID($id: ID!) {\n    character(id: $id) {\n    id\n    name\n    status\n    species\n    gender\n    image\n  }\n  }"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
