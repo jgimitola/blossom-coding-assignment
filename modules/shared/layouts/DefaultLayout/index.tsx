@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { type ReactNode } from 'react';
 
 interface DefaultLayoutProps {
   children: ReactNode;
@@ -7,7 +7,7 @@ interface DefaultLayoutProps {
 const DefaultLayout = (props: DefaultLayoutProps) => {
   const { children } = props;
 
-  return <div>Hola</div>;
+  return <div>{children}</div>;
 };
 
 export default DefaultLayout;
