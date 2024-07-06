@@ -5,6 +5,7 @@ import '@/shared/styles/globals.css';
 
 import { ApolloProvider } from '@apollo/client';
 
+import DataWrapper from '@/shared/components/DataWrapper';
 import DefaultLayout from '@/shared/layouts/DefaultLayout';
 import createApolloClient from '@/shared/lib/apolloClient';
 
@@ -21,9 +22,11 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
 
       <ApolloProvider client={client}>
-        <DefaultLayout>
-          <Component {...pageProps} />
-        </DefaultLayout>
+        <DataWrapper>
+          <DefaultLayout>
+            <Component {...pageProps} />
+          </DefaultLayout>
+        </DataWrapper>
       </ApolloProvider>
     </>
   );
