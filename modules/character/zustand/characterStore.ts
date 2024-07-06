@@ -1,20 +1,33 @@
 import { create, type StateCreator } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { CharacterData } from '@/character/types';
+import type {
+  CharacterData,
+  CharacterGender,
+  CharacterStatus,
+} from '@/character/types';
 
 export interface Characterstate {
+  filters: {
+    gender: CharacterGender | '';
+    species: string;
+    status: CharacterStatus | '';
+  };
   starredCharacters: CharacterData[];
 
   isCharacterStarred: (id: string) => boolean;
-  addCharacter: (data: CharacterData) => void;
-  removeCharacter: (id: string) => void;
+  toggleCharacter: (data: CharacterData) => void;
 }
 
 const defaultState: Omit<
   Characterstate,
-  'addCharacter' | 'removeCharacter' | 'isCharacterStarred'
+  'toggleCharacter' | 'isCharacterStarred'
 > = {
+  filters: {
+    gender: '',
+    species: '',
+    status: '',
+  },
   starredCharacters: [],
 };
 
@@ -24,14 +37,19 @@ const storeApi: StateCreator<Characterstate> = (set, get) => ({
   isCharacterStarred: (id) =>
     Boolean(get().starredCharacters.find((c) => c.id === id)),
 
-  addCharacter: (data) => {
+  toggleCharacter: (data) => {
+    if (get().isCharacterStarred(data.id)) {
+      set({
+        starredCharacters: get().starredCharacters.filter(
+          (c) => c.id !== data.id
+        ),
+      });
+
+      return;
+    }
+
     set({
       starredCharacters: [...get().starredCharacters, { ...data }],
-    });
-  },
-  removeCharacter: (id) => {
-    set({
-      starredCharacters: get().starredCharacters.filter((c) => c.id !== id),
     });
   },
 });
