@@ -32,7 +32,7 @@ const ResultCharacterList = (props: ResultCharacterListProps) => {
             <CharacterCard
               key={c.id}
               characterData={c}
-              handleStar={() => toggleCharacter(c)}
+              handleToggle={() => toggleCharacter(c)}
             />
           );
         })}

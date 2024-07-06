@@ -41,7 +41,7 @@ const StarrredCharacterList = (props: ResultCharacterListProps) => {
             key={c.id}
             isStarred
             characterData={c}
-            handleStar={() => toggleCharacter(c)}
+            handleToggle={() => toggleCharacter(c)}
           />
         ))}
       </ListScroller>

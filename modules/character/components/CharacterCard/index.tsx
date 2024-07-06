@@ -12,7 +12,7 @@ interface CharacterCardProps {
   characterData: CharacterData;
   isStarred?: boolean;
 
-  handleStar?: MouseEventHandler<HTMLButtonElement>;
+  handleToggle?: MouseEventHandler<HTMLButtonElement>;
 }
 
 const containerClasses = cva(['flex', 'gap-4', 'py-4', 'px-5', 'items-center']);
@@ -32,7 +32,7 @@ const buttonClasses = cva([
 ]);
 
 const CharacterCard = (props: CharacterCardProps) => {
-  const { characterData, isStarred = false, handleStar } = props;
+  const { characterData, isStarred = false, handleToggle } = props;
 
   return (
     <li className={containerClasses()}>
@@ -47,7 +47,11 @@ const CharacterCard = (props: CharacterCardProps) => {
       </div>
 
       <div className={actionClasses()}>
-        <button type="button" className={buttonClasses()} onClick={handleStar}>
+        <button
+          type="button"
+          className={buttonClasses()}
+          onClick={handleToggle}
+        >
           {isStarred ? (
             <>
               <FilledHeartIcon />
