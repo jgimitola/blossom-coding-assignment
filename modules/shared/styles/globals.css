@@ -9,6 +9,26 @@ body,
   max-height: 100%;
 }
 
+html {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb,
+  ::-webkit-scrollbar-track {
+    border-radius: 16px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #111827;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f3f4f6;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
