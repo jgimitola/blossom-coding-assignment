@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import isEqual from 'lodash/isEqual';
-
 import { cva } from 'class-variance-authority';
+
+import isEqual from 'lodash/isEqual';
 
 import { CharacterFilters } from '@/character/types';
 import useCharacterStore from '@/character/zustand/characterStore';
@@ -15,19 +15,21 @@ import FilterOptionList from '@/shared/components/FilterOptionList';
 
 import availableFilters from '../lib/availableFilters';
 
-interface FiltersPanelProps {}
+interface ListFiltersProps {
+  renderedOnDrawer?: boolean;
+}
 
-const containerClasses = cva([
-  'p-6',
-  'rounded-md',
-  'bg-white',
-  'shadow-lg',
-  'w-full',
-  'border-[1px]',
-]);
+const buttonClasses = cva([''], {
+  variants: {
+    state: {
+      popover: [],
+      drawer: ['mt-auto'],
+    },
+  },
+});
 
-const FiltersPanel = (props: FiltersPanelProps) => {
-  const {} = props;
+const ListFilters = (props: ListFiltersProps) => {
+  const { renderedOnDrawer = false } = props;
 
   const filters = useCharacterStore((store) => store.filters);
   const updateFilters = useCharacterStore((store) => store.updateFilters);
@@ -41,7 +43,7 @@ const FiltersPanel = (props: FiltersPanelProps) => {
   };
 
   return (
-    <div className={containerClasses()}>
+    <>
       {availableFilters.map((filter) => (
         <FilterContainer key={filter.id}>
           <FilterLabel>{filter.label}</FilterLabel>
@@ -68,13 +70,16 @@ const FiltersPanel = (props: FiltersPanelProps) => {
       ))}
 
       <Button
+        className={buttonClasses({
+          state: renderedOnDrawer ? 'drawer' : 'popover',
+        })}
         disabled={isEqual(localFilters, filters)}
         onClick={handleUpdateFilters}
       >
         Filter
       </Button>
-    </div>
+    </>
   );
 };
 
-export default FiltersPanel;
+export default ListFilters;
