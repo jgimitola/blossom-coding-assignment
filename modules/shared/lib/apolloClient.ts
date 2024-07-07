@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const createApolloClient = () => {
   return new ApolloClient({
-    uri: 'https://rickandmortyapi.com/graphql',
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_URL,
     cache: new InMemoryCache(),
   });
 };
