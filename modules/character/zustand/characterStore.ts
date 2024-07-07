@@ -16,6 +16,7 @@ export interface Characterstate {
   selectedCharacter: CharacterData | null;
   starredCharacters: CharacterData[];
 
+  filterNumber: () => number;
   isCharacterSelected: (id: string) => boolean;
   isCharacterStarred: (id: string) => boolean;
   selectCharacter: (data: CharacterData) => void;
@@ -28,6 +29,7 @@ const defaultState: Omit<
   | 'isCharacterStarred'
   | 'isCharacterSelected'
   | 'selectCharacter'
+  | 'filterNumber'
 > = {
   filters: {
     gender: '',
@@ -40,6 +42,11 @@ const defaultState: Omit<
 
 const storeApi: StateCreator<Characterstate> = (set, get) => ({
   ...defaultState,
+
+  filterNumber: () =>
+    Object.entries(get().filters)
+      .map(([_, value]) => value)
+      .reduce((p, c) => p + (!!c ? 1 : 0), 0),
 
   isCharacterSelected: (id) => {
     const currentCharacter = get().selectedCharacter;

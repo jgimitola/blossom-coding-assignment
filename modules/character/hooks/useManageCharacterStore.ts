@@ -7,9 +7,8 @@ const useManageCharacterStore = () => {
   const router = useRouter();
 
   const filters = useCharacterStore((store) => store.filters);
-  const filterNumber = Object.entries(filters)
-    .map(([key, value]) => value)
-    .reduce((p, c) => p + (!!c ? 1 : 0), 0);
+
+  const filterNumber = useCharacterStore((store) => store.filterNumber);
 
   const starredCharacters = useCharacterStore(
     (store) => store.starredCharacters

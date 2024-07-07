@@ -24,7 +24,7 @@ const StarrredCharacterList = (props: ResultCharacterListProps) => {
   return (
     <ListContainer className="shrink-0 max-h-[20rem]">
       <ListLabel>
-        {filterNumber > 0 ? (
+        {filterNumber() > 0 ? (
           <>
             {characters.length} Results {filterNumber} Filter
           </>
