@@ -13,29 +13,50 @@ export interface Characterstate {
     species: string;
     status: CharacterStatus | '';
   };
+  selectedCharacter: CharacterData | null;
   starredCharacters: CharacterData[];
 
+  isCharacterSelected: (id: string) => boolean;
   isCharacterStarred: (id: string) => boolean;
+  selectCharacter: (data: CharacterData) => void;
   toggleCharacter: (data: CharacterData) => void;
 }
 
 const defaultState: Omit<
   Characterstate,
-  'toggleCharacter' | 'isCharacterStarred'
+  | 'toggleCharacter'
+  | 'isCharacterStarred'
+  | 'isCharacterSelected'
+  | 'selectCharacter'
 > = {
   filters: {
     gender: '',
     species: '',
     status: '',
   },
+  selectedCharacter: null,
   starredCharacters: [],
 };
 
 const storeApi: StateCreator<Characterstate> = (set, get) => ({
   ...defaultState,
 
+  isCharacterSelected: (id) => {
+    const currentCharacter = get().selectedCharacter;
+
+    if (!currentCharacter) return false;
+
+    return currentCharacter.id === id;
+  },
+
   isCharacterStarred: (id) =>
     Boolean(get().starredCharacters.find((c) => c.id === id)),
+
+  selectCharacter: (data) => {
+    set({
+      selectedCharacter: data,
+    });
+  },
 
   toggleCharacter: (data) => {
     if (get().isCharacterStarred(data.id)) {

@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import CharacterCard from '@/character/components/CharacterCard';
 import { CharacterData } from '@/character/types';
 import useCharacterStore from '@/character/zustand/characterStore';
@@ -13,7 +15,15 @@ interface ResultCharacterListProps {
 const ResultCharacterList = (props: ResultCharacterListProps) => {
   const { characters } = props;
 
+  const router = useRouter();
+
+  const selectCharacter = useCharacterStore((store) => store.selectCharacter);
+
   const toggleCharacter = useCharacterStore((store) => store.toggleCharacter);
+
+  const isCharacterSelected = useCharacterStore(
+    (store) => store.isCharacterSelected
+  );
 
   const isCharacterStarred = useCharacterStore(
     (store) => store.isCharacterStarred
@@ -23,6 +33,12 @@ const ResultCharacterList = (props: ResultCharacterListProps) => {
     (c) => !isCharacterStarred(c.id)
   );
 
+  const handleClick = (characterData: CharacterData) => {
+    selectCharacter(characterData);
+
+    router.replace(`/character/${characterData.id}`);
+  };
+
   return (
     <ListContainer>
       <ListLabel>Characters ({displayedCharacters.length})</ListLabel>
@@ -31,7 +47,9 @@ const ResultCharacterList = (props: ResultCharacterListProps) => {
           return (
             <CharacterCard
               key={c.id}
+              isSelected={isCharacterSelected(c.id)}
               characterData={c}
+              handleClick={() => handleClick(c)}
               handleToggle={() => toggleCharacter(c)}
             />
           );

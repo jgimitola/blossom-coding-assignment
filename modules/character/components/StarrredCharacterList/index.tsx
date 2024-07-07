@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import CharacterCard from '@/character/components/CharacterCard';
 import { CharacterData } from '@/character/types';
 import useCharacterStore from '@/character/zustand/characterStore';
@@ -13,6 +15,8 @@ interface ResultCharacterListProps {
 const StarrredCharacterList = (props: ResultCharacterListProps) => {
   const { characters } = props;
 
+  const router = useRouter();
+
   const filters = useCharacterStore((store) => store.filters);
   const filterNumber = Object.entries(filters)
     .map(([key, value]) => value)
@@ -22,7 +26,19 @@ const StarrredCharacterList = (props: ResultCharacterListProps) => {
     (store) => store.starredCharacters
   );
 
+  const isCharacterSelected = useCharacterStore(
+    (store) => store.isCharacterSelected
+  );
+
+  const selectCharacter = useCharacterStore((store) => store.selectCharacter);
+
   const toggleCharacter = useCharacterStore((store) => store.toggleCharacter);
+
+  const handleClick = (characterData: CharacterData) => {
+    selectCharacter(characterData);
+
+    router.replace(`/character/${characterData.id}`);
+  };
 
   return (
     <ListContainer className="shrink-0 max-h-[20rem]">
@@ -40,7 +56,9 @@ const StarrredCharacterList = (props: ResultCharacterListProps) => {
           <CharacterCard
             key={c.id}
             isStarred
+            isSelected={isCharacterSelected(c.id)}
             characterData={c}
+            handleClick={() => handleClick(c)}
             handleToggle={() => toggleCharacter(c)}
           />
         ))}
