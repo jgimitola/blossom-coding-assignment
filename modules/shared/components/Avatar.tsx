@@ -21,7 +21,12 @@ const Avatar = (props: AvatarProps) => {
 
   return (
     <div className={avatarClasses({ className })}>
-      <Image src={src} alt={alt} fill />
+      <Image
+        fill
+        src={src}
+        alt={alt}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
     </div>
   );
 };
