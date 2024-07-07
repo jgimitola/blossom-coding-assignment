@@ -1,21 +1,45 @@
-import { useRouter } from 'next/router';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
-import { useQuery } from '@apollo/client';
+import { z } from 'zod';
 
 import CharacterProfile from '@/character/components/CharacterProfile';
+import parseCharacter from '@/character/lib/parseCharacter';
 import GET_CHARACTER_BY_ID from '@/character/queries/GET_CHARACTER_BY_ID';
 
-const CharacterProfileId = () => {
-  const router = useRouter();
+import createApolloClient from '@/shared/lib/apolloClient';
 
-  const query = useQuery(GET_CHARACTER_BY_ID, {
-    variables: { id: router.query.id }, // TODO: Get Id From getServerSideProps
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const idResult = z.string().safeParse(ctx.params?.id);
+
+  if (idResult.error) {
+    return {
+      redirect: { destination: '/', permanent: false },
+    };
+  }
+
+  const id = idResult.data;
+
+  const client = createApolloClient();
+
+  const { data } = await client.query({
+    query: GET_CHARACTER_BY_ID,
+    variables: { id },
   });
 
-  // TODO: parse object to work with the correct type
-  const character = query.data?.character;
+  const character = parseCharacter(data.character);
 
-  if (!character) return null;
+  if (!character)
+    return {
+      redirect: { destination: '/', permanent: false },
+    };
+
+  return { props: { character } };
+};
+
+type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>;
+
+const CharacterProfileId = (props: PageProps) => {
+  const { character } = props;
 
   return (
     <main className="h-full">
