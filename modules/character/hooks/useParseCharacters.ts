@@ -1,18 +1,9 @@
-import { z } from 'zod';
-import characterDataSchema from '../schemas/characterDataSchema';
+import parseCharacters from '../lib/parseCharacters';
 
 const useParseCharacters = (characters: unknown) => {
-  if (!characters) return [];
+  const parsedCharacters = parseCharacters(characters);
 
-  const result = z.array(characterDataSchema).safeParse(characters);
-
-  if (result.error) {
-    console.error(result.error);
-
-    return [];
-  }
-
-  return result.data;
+  return parsedCharacters;
 };
 
 export default useParseCharacters;
