@@ -9,7 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        magnifier: 'hsla(218, 11%, 65%, 1)',
         disabled: 'hsla(216, 12%, 84%, 1)',
+        search: 'hsla(220, 14%, 96%, 1)',
         'primary.100': 'hsla(264, 100%, 95%, 1)',
         'primary.600': 'hsla(263, 51%, 55%, 1)',
         'primary.700': 'hsla(263, 47%, 40%, 1)',
