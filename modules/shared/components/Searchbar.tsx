@@ -13,7 +13,7 @@ const Searchbar = forwardRef<HTMLDivElement, SearchbarProps>((props, ref) => {
   return (
     <div
       ref={ref}
-      className="flex items-center gap-2 rounded-lg x-2 w-full bg-search px-3 py-2"
+      className="flex items-center gap-2 rounded-lg x-2 w-full bg-search px-3 md:py-2"
     >
       <div className="shrink-0 w-5 h-5 text-magnifier">
         <MagnifierIcon />
@@ -27,7 +27,7 @@ const Searchbar = forwardRef<HTMLDivElement, SearchbarProps>((props, ref) => {
       />
 
       <button
-        className="shrink-0 w-9 h-9 p-2 rounded-lg ms-auto cursor-pointer bg-primary.100 text-primary.700"
+        className="shrink-0 w-9 h-9 p-2 rounded-lg ms-auto cursor-pointer md:bg-primary.100 text-primary.700"
         onClick={handleFilterOpen}
       >
         <MixerVerticalIcon />

@@ -27,9 +27,12 @@ const containerClasses = cva([
   'flex',
   'flex-col',
   'h-full',
-  'w-[23.4375rem]',
-  'p-4',
+  'w-full',
+  'p-6',
+  'md:p-4',
   'pt-[2.625rem]',
+  'md:pt-[2.625rem]',
+  'md:w-[23.4375rem]',
 ]);
 
 const headerClasses = cva(['shrink-0', 'pb-4']);

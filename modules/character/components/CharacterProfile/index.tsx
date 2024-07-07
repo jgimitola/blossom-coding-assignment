@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { cva } from 'class-variance-authority';
 
 import capitalize from 'lodash/capitalize';
@@ -7,12 +9,13 @@ import useCharacterStore from '@/character/zustand/characterStore';
 
 import Avatar from '@/shared/components/Avatar';
 import FilledHeartIcon from '@/shared/components/FilledHeartIcon';
+import LeftArrowIcon from '@/shared/components/LeftArrowIcon';
 
 interface CharacterProfileProps {
   character: CharacterData;
 }
 
-const containerClasses = cva(['md:px-28', 'px-16', 'pt-10']);
+const containerClasses = cva(['px-6', 'md:px-12', 'md:pt-10', 'lg:px-28']);
 
 const avatarWrapperClasses = cva(['relative', 'w-fit']);
 
@@ -62,6 +65,12 @@ const CharacterProfile = (props: CharacterProfileProps) => {
 
   return (
     <section className={containerClasses()}>
+      <div className="p-4 pl-0 md:hidden">
+        <Link href="/" className="block h-9 w-9 p-1 text-primary.600">
+          <LeftArrowIcon />
+        </Link>
+      </div>
+
       <div>
         <div className={avatarWrapperClasses()}>
           <Avatar
@@ -76,7 +85,6 @@ const CharacterProfile = (props: CharacterProfileProps) => {
         </div>
         <h1 className={titleClasses()}>{character.name}</h1>
       </div>
-
       <dl>
         <div className={definitionClasses()}>
           <dt className={definitionLabelClasses()}>Specie</dt>

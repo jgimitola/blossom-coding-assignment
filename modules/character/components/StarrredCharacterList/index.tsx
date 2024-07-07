@@ -31,7 +31,7 @@ const StarrredCharacterList = (props: ResultCharacterListProps) => {
       <ListLabel>
         {filterNumber() > 0 ? (
           <div className="flex items-center">
-            <span className="text-accent capitalize">
+            <span className="text-accent capitalize text-base">
               {characters.length} Results
             </span>
             <PillBadge className="ml-auto">{filterNumber()} Filter</PillBadge>
