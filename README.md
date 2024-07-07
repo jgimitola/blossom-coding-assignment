@@ -12,6 +12,12 @@ First, install all dependencies:
 npm install
 ```
 
+Create an .env based on .env.example:
+
+```
+NEXT_PUBLIC_GRAPHQL_URL=""
+```
+
 Now, you can run the development server:
 
 ```bash
