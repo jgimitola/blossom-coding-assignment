@@ -19,6 +19,7 @@ interface CharacterCardProps {
 
 const containerClasses = cva(
   [
+    'relative',
     'flex',
     'gap-4',
     'py-4',
@@ -94,6 +95,8 @@ const CharacterCard = (props: CharacterCardProps) => {
       })}
       onClick={handleClick}
     >
+      <hr className="absolute top-0 left-5 right-5" />
+
       <Avatar
         src={characterData.image}
         alt={`${characterData.name} profile image`}
