@@ -11,11 +11,7 @@ const ListScroller = forwardRef<HTMLUListElement, ListScrollerProps>(
     const { className, ...rest } = props;
 
     return (
-      <figcaption
-        ref={ref}
-        className={scrollerClassName({ className })}
-        {...rest}
-      />
+      <ul ref={ref} className={scrollerClassName({ className })} {...rest} />
     );
   }
 );

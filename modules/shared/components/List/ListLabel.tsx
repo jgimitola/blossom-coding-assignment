@@ -4,7 +4,14 @@ import { cva } from 'class-variance-authority';
 
 interface ListLabelProps extends HTMLProps<HTMLElement> {}
 
-const labelClassName = cva(['shrink-0']);
+const labelClassName = cva([
+  'shrink-0',
+  'p-4',
+  'uppercase',
+  'text-xs',
+  'text-label',
+  'font-semibold',
+]);
 
 const ListLabel = forwardRef<HTMLElement, ListLabelProps>((props, ref) => {
   const { className, ...rest } = props;
