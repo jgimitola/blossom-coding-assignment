@@ -21,7 +21,7 @@ html {
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #111827;
+    background: hsla(263, 51%, 55%, 1);
   }
 
   ::-webkit-scrollbar-track {
