@@ -37,6 +37,19 @@ const containerClasses = cva(
   }
 );
 
+const nameClasses = cva([
+  'text-base',
+  'font-semibold',
+  'text-titles',
+
+  'max-w-[20ch]',
+  'text-ellipsis',
+  'whitespace-nowrap',
+  'overflow-hidden',
+]);
+
+const speciesClasses = cva(['text-base', 'font-normal', 'text-label']);
+
 const actionClasses = cva(['shrink-0', 'ms-auto', 'my-auto']);
 
 const buttonClasses = cva(
@@ -50,12 +63,13 @@ const buttonClasses = cva(
     'items-center',
     'w-8',
     'h-8',
+    'bg-white',
   ],
   {
     variants: {
       state: {
         unstarred: ['text-disabled'],
-        starred: ['text-secondary.600', 'bg-white'],
+        starred: ['text-secondary.600'],
       },
     },
     defaultVariants: {
@@ -86,8 +100,8 @@ const CharacterCard = (props: CharacterCardProps) => {
       />
 
       <div>
-        <p>{characterData.name}</p>
-        <p>{characterData.species}</p>
+        <p className={nameClasses()}>{characterData.name}</p>
+        <p className={speciesClasses()}>{characterData.species}</p>
       </div>
 
       <div className={actionClasses()}>
