@@ -10,10 +10,10 @@ const DefaultLayout = (props: DefaultLayoutProps) => {
   const { children } = props;
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full isolate">
       <SearchSidebar />
 
-      <div className="h-full grow">{children}</div>
+      <div className="h-full grow md:shadow-md ">{children}</div>
     </div>
   );
 };
