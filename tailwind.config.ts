@@ -18,6 +18,7 @@ const config: Config = {
         'secondary.600': 'hsla(104, 67%, 53%, 1)',
         titles: 'hsla(221, 39%, 11%, 1)',
         pagetTitle: 'hsla(215, 28%, 17%, 1)',
+        label: 'hsla(220, 9%, 46%, 1)',
       },
     },
   },

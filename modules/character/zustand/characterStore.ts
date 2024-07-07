@@ -1,20 +1,15 @@
 import { create, type StateCreator } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type {
-  CharacterData,
-  CharacterGender,
-  CharacterStatus,
-} from '@/character/types';
+import type { CharacterData, CharacterFilters } from '@/character/types';
 
 export interface Characterstate {
-  filters: {
-    gender: CharacterGender | '';
-    species: string;
-    status: CharacterStatus | '';
-  };
+  filters: CharacterFilters;
   selectedCharacter: CharacterData | null;
   starredCharacters: CharacterData[];
+
+  updateNameFilter: (name: string) => void;
+  updateFilters: (filters: CharacterFilters) => void;
 
   filterNumber: () => number;
   isCharacterSelected: (id: string) => boolean;
@@ -30,8 +25,12 @@ const defaultState: Omit<
   | 'isCharacterSelected'
   | 'selectCharacter'
   | 'filterNumber'
+  | 'updateFilters'
+  | 'updateNameFilter'
 > = {
   filters: {
+    name: '',
+    character: '',
     gender: '',
     species: '',
     status: '',
@@ -42,6 +41,14 @@ const defaultState: Omit<
 
 const storeApi: StateCreator<Characterstate> = (set, get) => ({
   ...defaultState,
+
+  updateNameFilter: (name) => {
+    set({ filters: { ...get().filters, name } });
+  },
+
+  updateFilters: (filters) => {
+    set({ filters });
+  },
 
   filterNumber: () =>
     Object.entries(get().filters)

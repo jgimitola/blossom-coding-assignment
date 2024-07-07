@@ -26,7 +26,7 @@ const StarrredCharacterList = (props: ResultCharacterListProps) => {
       <ListLabel>
         {filterNumber() > 0 ? (
           <>
-            {characters.length} Results {filterNumber} Filter
+            {characters.length} Results {filterNumber()} Filter
           </>
         ) : (
           <>Starred Characters ({starredCharacters.length})</>
