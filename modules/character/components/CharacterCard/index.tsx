@@ -18,7 +18,15 @@ interface CharacterCardProps {
 }
 
 const containerClasses = cva(
-  ['flex', 'gap-4', 'py-4', 'px-5', 'items-center', 'rounded-lg'],
+  [
+    'flex',
+    'gap-4',
+    'py-4',
+    'px-5',
+    'items-center',
+    'rounded-lg',
+    'cursor-pointer',
+  ],
   {
     variants: {
       state: { unselected: ['bg-white'], selected: ['bg-primary.100'] },
