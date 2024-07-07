@@ -1,8 +1,6 @@
-import { useRouter } from 'next/router';
-
 import CharacterCard from '@/character/components/CharacterCard';
+import useManageCharacterStore from '@/character/hooks/useManageCharacterStore';
 import { CharacterData } from '@/character/types';
-import useCharacterStore from '@/character/zustand/characterStore';
 
 import ListContainer from '@/shared/components/List/ListContainer';
 import ListLabel from '@/shared/components/List/ListLabel';
@@ -15,30 +13,13 @@ interface ResultCharacterListProps {
 const StarrredCharacterList = (props: ResultCharacterListProps) => {
   const { characters } = props;
 
-  const router = useRouter();
-
-  const filters = useCharacterStore((store) => store.filters);
-  const filterNumber = Object.entries(filters)
-    .map(([key, value]) => value)
-    .reduce((p, c) => p + (!!c ? 1 : 0), 0);
-
-  const starredCharacters = useCharacterStore(
-    (store) => store.starredCharacters
-  );
-
-  const isCharacterSelected = useCharacterStore(
-    (store) => store.isCharacterSelected
-  );
-
-  const selectCharacter = useCharacterStore((store) => store.selectCharacter);
-
-  const toggleCharacter = useCharacterStore((store) => store.toggleCharacter);
-
-  const handleClick = (characterData: CharacterData) => {
-    selectCharacter(characterData);
-
-    router.replace(`/character/${characterData.id}`);
-  };
+  const {
+    filterNumber,
+    starredCharacters,
+    isCharacterSelected,
+    toggleCharacter,
+    handleCharacterCard,
+  } = useManageCharacterStore();
 
   return (
     <ListContainer className="shrink-0 max-h-[20rem]">
@@ -58,7 +39,7 @@ const StarrredCharacterList = (props: ResultCharacterListProps) => {
             isStarred
             isSelected={isCharacterSelected(c.id)}
             characterData={c}
-            handleClick={() => handleClick(c)}
+            handleClick={() => handleCharacterCard(c)}
             handleToggle={() => toggleCharacter(c)}
           />
         ))}
