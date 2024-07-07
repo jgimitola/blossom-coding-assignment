@@ -17,11 +17,7 @@ const config: Config = {
         'primary.700': 'hsla(263, 47%, 40%, 1)',
         'secondary.600': 'hsla(104, 67%, 53%, 1)',
         titles: 'hsla(221, 39%, 11%, 1)',
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        pagetTitle: 'hsla(215, 28%, 17%, 1)',
       },
     },
   },
