@@ -20,19 +20,16 @@ const ResultCharacterList = (props: ResultCharacterListProps) => {
     handleCharacterCard,
   } = useManageCharacterStore();
 
-  const displayedCharacters = characters.filter(
-    (c) => !isCharacterStarred(c.id)
-  );
-
   return (
     <ListContainer>
-      <ListLabel>Characters ({displayedCharacters.length})</ListLabel>
+      <ListLabel>Characters ({characters.length})</ListLabel>
       <ListScroller className="overflow-y-auto">
-        {displayedCharacters.map((c) => {
+        {characters.map((c) => {
           return (
             <CharacterCard
               key={c.id}
               isSelected={isCharacterSelected(c.id)}
+              isStarred={isCharacterStarred(c.id)}
               characterData={c}
               handleClick={() => handleCharacterCard(c)}
               handleToggle={() => toggleCharacter(c)}

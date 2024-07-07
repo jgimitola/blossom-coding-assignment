@@ -12,6 +12,8 @@ export interface Characterstate {
   updateFilters: (filters: CharacterFilters) => void;
 
   filterNumber: () => number;
+  filteredStarred: () => CharacterData[];
+
   isCharacterSelected: (id: string) => boolean;
   isCharacterStarred: (id: string) => boolean;
   selectCharacter: (data: CharacterData) => void;
@@ -27,6 +29,7 @@ const defaultState: Omit<
   | 'filterNumber'
   | 'updateFilters'
   | 'updateNameFilter'
+  | 'filteredStarred'
 > = {
   filters: {
     name: '',
@@ -41,6 +44,25 @@ const defaultState: Omit<
 
 const storeApi: StateCreator<Characterstate> = (set, get) => ({
   ...defaultState,
+
+  filteredStarred: () => {
+    const filters = get().filters;
+
+    const filteredData = get()
+      .starredCharacters.filter((char) =>
+        !!filters.status ? char.status === filters.status : true
+      )
+      .filter((char) =>
+        !!filters.gender ? char.gender === filters.gender : true
+      )
+      .filter((char) =>
+        !!filters.name
+          ? char.name.toLowerCase().includes(filters.name.toLowerCase())
+          : true
+      );
+
+    return filteredData;
+  },
 
   updateNameFilter: (name) => {
     set({ filters: { ...get().filters, name } });
