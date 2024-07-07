@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Live version
 
-_TO BE DEPLOYED_
+[LIVE VERSION](https://blossom-coding-assignment.vercel.app/)
 
 ## Getting Started
 
